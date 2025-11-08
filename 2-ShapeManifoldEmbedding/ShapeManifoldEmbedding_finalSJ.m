@@ -1,4 +1,4 @@
-function [ CellShapeData ] = ShapeManifoldEmbedding_finalSJ( Frames, savedestination, doSparse )
+function [ CellShapeData ] = ShapeManifoldEmbedding_finalSJ( Frames, savedestination, doSparse, new_d )
 %SHAPEMANIFOLDEMBEDDING Frames must be Nx1 Cell Array, N is your sample 
 %size, each cell contains the Mx2 Contour outlines (M can vary), corresponding to closed planar curves 
 %savedestination should be a string indicating the path to the desired save destination of the
@@ -76,7 +76,7 @@ for i=1:N
 end
     
 %diffusion map embedding
-new_d=5; %Increase this to generate more new dimensions
+%new_d=5; %Increase this to generate more new dimensions
 CellShapeData=BAM_DM_frame(CellShapeData, new_d,h,nodes, doSparse);
 
 waitbar((1)/(1),h,sprintf('Complete'));
