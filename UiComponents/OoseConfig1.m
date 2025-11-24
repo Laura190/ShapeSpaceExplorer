@@ -22,7 +22,7 @@ function varargout = OoseConfig1(varargin)
 
 % Edit the above text to modify the response to help OoseConfig1
 
-% Last Modified by GUIDE v2.5 19-Sep-2024 10:05:46
+% Last Modified by GUIDE v2.5 24-Nov-2025 13:40:09
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -62,7 +62,8 @@ img=imread(imFile);
 imshow(img,'Parent',handles.axes1);
 set(handles.edit1, 'String','...'); 
 set(handles.edit2, 'String','...');
-set(handles.popupmenu3, 'String',{'Nearest Neighbors (K=5)','Laplacian Pyramids'});
+set(handles.popupmenu3, 'String',{'K Nearest Neighbors','Laplacian Pyramids'});
+set(handles.edit3, 'String','5');
 
 % Update handles structure
 guidata(hObject, handles);
@@ -82,6 +83,7 @@ function varargout = OoseConfig1_OutputFcn(hObject, eventdata, handles)
 struc.anaFolder = get(handles.edit1, 'String');
 struc.OosFolder = get(handles.edit2, 'String');
 struc.chosen_method = get(handles.popupmenu3, 'Value');
+struc.nn_value = str2double(get(handles.edit3,'String'));
 varargout{1}=struc;
 delete(handles.figure1);
 
@@ -127,6 +129,7 @@ folderAna =get(handles.edit1, 'String');
 folderOos =get(handles.edit2, 'String');
 chosen_method = get(handles.popupmenu3, 'Value');
 selected_item = get(handles.popupmenu3, 'String');
+nn_value = str2double(get(handles.edit3,'String'));
 disp(['Running OoSE embeddding using ', selected_item{chosen_method}]);
 
 if strcmp(folderAna,'...')==1 || strcmp(folderOos,'...')
@@ -231,6 +234,29 @@ function popupmenu3_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit3_Callback(hObject, eventdata, handles)
+% hObject    handle to edit3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit3 as text
+%        str2double(get(hObject,'String')) returns contents of edit3 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');

@@ -45,7 +45,7 @@ if path.chosen_method == 2
     LP_OoSE_run(cData.CellShapeData, lPath, bPath, path.OosFolder);
 else
     DIST= load(bPath);
-    K=5; %Nearest neighbers using K=5
+    K=path.nn_value;
     nn_OoSE_run(cData.CellShapeData, DIST, path.OosFolder,K);
 end
 
