@@ -10,7 +10,8 @@ function [ BigCellArray, cell_indices ] = Import_Manual_Segs
 %ImageJ getSelectionCoordinates(x, y); and saved as individual textfiles
 %
 %
-
+load dataset.mat
+load goldstandard.mat
 out = SelectFolder(matlabroot);
 Experiment_folder=out.folder;
 D=dir(Experiment_folder);
@@ -29,8 +30,9 @@ for i=1:num_cells
     num_frames=length(frame_names);
     
     for j=1:num_frames
-        A=importdata([fdr_name frame_names{j}]);
-        BigCellArray{end+1,1}=A.data(:,(end-1):end);
+        %A=importdata([fdr_name frame_names{j}]);
+        A=readJSON(['JSON/' shape{i,2}]);
+        BigCellArray{end+1,1}=A.points(:,(end-1):end);
     end
     cell_indices=[cell_indices; i*ones(num_frames,1)];
 end

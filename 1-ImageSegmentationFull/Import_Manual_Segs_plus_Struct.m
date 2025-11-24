@@ -12,7 +12,8 @@ function [ BigCellArray, cell_indices ] = Import_Manual_Segs_plus_Struct
 % ImageJ getSelectionCoordinates(x, y); and saved as individual textfiles
 %
 %
-
+load dataset.mat
+load goldstandard.mat
 Experiment_folder = uigetdir(pwd,'Select Data Folder');
 Analysis_folder = uigetdir(pwd,'Select Analysis Folder');
 
@@ -43,15 +44,16 @@ for i=1:num_stacks
         BigCellDataStruct(cell_num).Cell_number=j;
         BigCellDataStruct(cell_num).Contours={};
         skipped = 0;
-        for k=1:num_frames
+        for k=1:length(shape)
             filename = [fdr_name frame_names{k}];
     
             fid  = fopen(filename);
             xh=fgets(fid);
-            datacell = textscan(fid,'%f\t%f\t%f');
+            datacell = readJSON(['JSON/' shape{k,2}]);
             fclose(fid) ;
 
-            data = [datacell{2},datacell{3}];
+            data = [datacell.points(:,(end-1):end)];
+            
 
             if size(data,1) >= 3;		%reject empty datafiles
 

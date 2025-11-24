@@ -70,7 +70,7 @@ symscore=sum(C_(:))/sum(C1(:));
 end
 
 function [binimage]=BinIm(coords,num)
-coords=round(coords);
+coords=round(coords*188);
 x_coords=coords(:,1);
 y_coords=coords(:,2);
 y_coords=-y_coords;
