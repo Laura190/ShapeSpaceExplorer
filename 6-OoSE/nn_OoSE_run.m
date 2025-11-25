@@ -1,5 +1,6 @@
 function [ OoSE_emb ] = nn_OoSE_run(trainingCellShapeData, DIST, new_unique_savedestination,K )
 
+fprintf('Using K=3\n',K)
 h = waitbar(0,'Please wait...');
 waitbar(0,h,sprintf('%5.2f%% completed ..',0));
 
