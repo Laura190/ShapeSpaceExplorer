@@ -89,6 +89,17 @@ if ~isempty(APe_output_foldername)
     saveas(gcf, fPath, 'fig');
     saveas(gcf, fPath, 'epsc');
 end
+figure
+for i=1:number
+    clust_idx=clust_order(i);
+    exems=wish_list(T2==clust_idx);
+    points=ismember(idx,exems);
+    plot(SCORE(points,3),SCORE(points,4),'.','Color',colour(i,:), 'MarkerSize', mk)
+    hold on
+end
+axis tight
+axis equal
+grid on
 
 L=length(wish_list);
 

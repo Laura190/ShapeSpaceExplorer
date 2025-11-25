@@ -1,4 +1,4 @@
-function [ BigCellArray, cell_indices ] = Import_Manual_Segs_plus_Struct
+function [ BigCellArray, cell_indices ] = Import_Manual_Segs_plus_Struct(shape)
 %LOAD_MANUAL_SEGS Summary
 %
 % OUTPUT: Will generate BigCellArray.mat and BigCellDtaStruct.mat for further analysis in ShapeSpaceExplorer from
@@ -12,8 +12,8 @@ function [ BigCellArray, cell_indices ] = Import_Manual_Segs_plus_Struct
 % ImageJ getSelectionCoordinates(x, y); and saved as individual textfiles
 %
 %
-load dataset.mat
-load goldstandard.mat
+%load dataset.mat
+%load goldstandard.mat
 Experiment_folder = uigetdir(pwd,'Select Data Folder');
 Analysis_folder = uigetdir(pwd,'Select Analysis Folder');
 
@@ -44,7 +44,7 @@ for i=1:num_stacks
         BigCellDataStruct(cell_num).Cell_number=j;
         BigCellDataStruct(cell_num).Contours={};
         skipped = 0;
-        for k=1:length(shape)
+        for k=1:num_frames
             filename = [fdr_name frame_names{k}];
     
             fid  = fopen(filename);
@@ -52,7 +52,7 @@ for i=1:num_stacks
             datacell = readJSON(['JSON/' shape{k,2}]);
             fclose(fid) ;
 
-            data = [datacell.points(:,(end-1):end)];
+            data = [datacell.points(:,(end-1):end)*1024];
             
 
             if size(data,1) >= 3;		%reject empty datafiles

@@ -36,6 +36,7 @@ end
 p.stop;
 D=[];
 p=median(W(:));
+pfactor=1;%0.001
 if RAMeff
     w=single(W);
     save([savedestination '/double_sim_matrix.mat'],'W','-v7.3')
@@ -43,13 +44,13 @@ if RAMeff
     
     save([savedestination '/single_sim_matrix.mat'],'w','-v7.3')
     save([savedestination '/pref.mat'],'p','-v7.3')
-    idx=apcluster_edit(w,0.001*p,savedestination);
+    idx=apcluster_edit(w,pfactor*p,savedestination);
     
     save([savedestination '/APclusterOutput.mat'],'idx','-v7.3')
     clear('w');
     load([savedestination '/double_sim_matrix.mat'])
 else
-    idx=apcluster_edit(W,0.001*p,savedestination);
+    idx=apcluster_edit(W,pfactor*p,savedestination);
     save([savedestination '/APclusterOutput.mat'],'idx','-v7.3')
 end
 exems=unique(idx);
