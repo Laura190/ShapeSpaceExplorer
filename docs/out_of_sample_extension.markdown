@@ -13,7 +13,7 @@ First, create a folder for the extension sample, we'll call it OoSE folder and p
 <code>1-ImageSegmentationFull > MakeBigStructs.m</code> or continue without inspection and run
 <code>1-ImageSegmentationFull > MakeBigStructsWithoutManual.m</code>.
 
-Secondly, run <code>6-OoSE > generate_OoSe_distMatrix_new</code>. Choose Analysis and OoSE folders and click <code>Start OOSE</code>. Choose one of the embedding methods: [Nearest Neighbours (K=5)](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) or [Laplacian Pyramids](https://doi.org/10.1137/1.9781611972825.17).
+Secondly, run <code>6-OoSE > generate_OoSe_distMatrix_new</code>. Choose Analysis and OoSE folders. Choose one of the embedding methods: [K Nearest Neighbours](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) or [Laplacian Pyramids](https://doi.org/10.1137/1.9781611972825.17). If using K nearest neighbours enter the value of K in the box below. This value is ignored for the Laplacian Pyramids method. Click <code>Start OOSE</code>. 
 <img align="center" width=500px src="./img/oose_config.png">
 
 After correctly finishing, there will be new files in the OOSE folder:
