@@ -7,7 +7,7 @@ nav_order: 4
 
 # Shape Manifold Embedding
 
-Run <code>2-ShapeManifoldEmbedding > RunShapeManifoldEmbedding.m</code>, which asks for the Analysis folder as input and gives the user the option of using sparse decomposition. 
+Run <code>2-ShapeManifoldEmbedding > RunShapeManifoldEmbedding.m</code>, which asks for the Analysis folder as input and gives the user the option of using sparse decomposition. The number of new dimensions to be calculated can also be entered, the default is 5.
 <img align="center" width=500px src="./img/ShapeManifoldEmbeddingDialog.png">
 
 Once correctly completed, a file called <code>CellShapeData.mat</code> is created in the Analysis folder

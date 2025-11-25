@@ -71,7 +71,20 @@ end
 handles.root=matlabpath;
 
 % Update handles structure
-guidata(hObject, handles);
+%guidata(hObject, handles);
+
+
+dimsbox = uicontrol(Style="popupmenu",Position=[10 15 40 30],Tag="popupmenu1",FontSize=12);
+handles.popupmenu1 = dimsbox;
+for i=1:1000
+    list{i}=num2str(i);
+end
+set(handles.popupmenu1, 'string', list);
+set(handles.popupmenu1, 'value', 5); % new dimensions default
+
+popup_text = uicontrol(Style="text",Position=[55 10 200 30],Tag="text1",String='Number of Dimensions',BackgroundColor="white",FontSize=12);
+handles.text1 = popup_text;
+guidata(hObject,handles);
 
 % UIWAIT makes SelectFolderEigen wait for user response (see UIRESUME)
 uiwait(handles.figure1);
@@ -92,6 +105,7 @@ if handles.cancel==1,   % if cancel
 end
 struc.folder = get(handles.edit1, 'String');
 struc.sparse = get(handles.checkbox1,'Value');
+struc.dims = get(handles.popupmenu1,'value');
 varargout{1}=struc;
 delete(handles.figure1);
 
@@ -181,3 +195,13 @@ function checkbox1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of checkbox1
+
+
+% --- Executes on selection change in popupmenu1.
+function popupmenu1_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu1
