@@ -74,7 +74,7 @@ handles.root=matlabpath;
 %guidata(hObject, handles);
 
 
-dimsbox = uicontrol(Style="popupmenu",Position=[10 30 40 30],Tag="popupmenu1");
+dimsbox = uicontrol(Style="popupmenu",Position=[10 15 40 30],Tag="popupmenu1",FontSize=12);
 handles.popupmenu1 = dimsbox;
 for i=1:1000
     list{i}=num2str(i);
@@ -82,7 +82,7 @@ end
 set(handles.popupmenu1, 'string', list);
 set(handles.popupmenu1, 'value', 5); % new dimensions default
 
-popup_text = uicontrol(Style="text",Position=[55 25 150 30],Tag="text1",String='Number of New Dimensions',BackgroundColor="white");
+popup_text = uicontrol(Style="text",Position=[55 10 200 30],Tag="text1",String='Number of Dimensions',BackgroundColor="white",FontSize=12);
 handles.text1 = popup_text;
 guidata(hObject,handles);
 
