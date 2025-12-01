@@ -76,11 +76,11 @@ handles.root=matlabpath;
 
 dimsbox = uicontrol(Style="popupmenu",Position=[10 15 40 30],Tag="popupmenu1",FontSize=12);
 handles.popupmenu1 = dimsbox;
-for i=1:1000
-    list{i}=num2str(i);
+for i=2:101
+    list{i-1}=num2str(i);
 end
 set(handles.popupmenu1, 'string', list);
-set(handles.popupmenu1, 'value', 5); % new dimensions default
+set(handles.popupmenu1, 'value', 4); % new dimensions default
 
 popup_text = uicontrol(Style="text",Position=[55 10 200 30],Tag="text1",String='Number of Dimensions',BackgroundColor="white",FontSize=12);
 handles.text1 = popup_text;
