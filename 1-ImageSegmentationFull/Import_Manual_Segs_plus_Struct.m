@@ -1,4 +1,4 @@
-function [ BigCellArray, cell_indices ] = Import_Manual_Segs_plus_Struct(shape)
+function [ BigCellArray, cell_indices ] = Import_Manual_Segs_plus_Struct
 %LOAD_MANUAL_SEGS Summary
 %
 % OUTPUT: Will generate BigCellArray.mat and BigCellDtaStruct.mat for further analysis in ShapeSpaceExplorer from
@@ -12,10 +12,12 @@ function [ BigCellArray, cell_indices ] = Import_Manual_Segs_plus_Struct(shape)
 % ImageJ getSelectionCoordinates(x, y); and saved as individual textfiles
 %
 %
-%load dataset.mat
+load('E:\LauraCooper\dataset-processinG\dataset-processing-master\SSE_datainput\shape_nodevices.mat')
 %load goldstandard.mat
 Experiment_folder = uigetdir(pwd,'Select Data Folder');
+display(Experiment_folder)
 Analysis_folder = uigetdir(pwd,'Select Analysis Folder');
+display(Analysis_folder)
 
 D=dir(Experiment_folder);
 D(~[D.isdir])= []; %Remove all non directories.
@@ -43,6 +45,7 @@ for i=1:num_stacks
         BigCellDataStruct(cell_num).Stack_number=i;
         BigCellDataStruct(cell_num).Cell_number=j;
         BigCellDataStruct(cell_num).Contours={};
+        BigCellDataStruct(cell_num).Shape={};
         skipped = 0;
         for k=1:num_frames
             filename = [fdr_name frame_names{k}];
@@ -59,6 +62,7 @@ for i=1:num_stacks
 
                         BigCellArray{end+1,1}=data(:,:);
 						BigCellDataStruct(cell_num).Contours{end+1}=BigCellArray{end,1};
+                        BigCellDataStruct(cell_num).Shape{end+1}=shape{k,2};
             else
                 skipped = skipped + 1;
             end
@@ -71,8 +75,8 @@ for i=1:num_stacks
     
 end
 
-save([Analysis_folder '/Bigcellarrayandindex.mat'], 'BigCellArray', 'cell_indices', '-v7.3')
-save([Analysis_folder '/BigCellDataStruct.mat'], 'BigCellDataStruct', '-v7.3')
+save([Analysis_folder '/Bigcellarrayandindex.mat'], 'BigCellArray', 'cell_indices', '-v7.3');
+save([Analysis_folder '/BigCellDataStruct.mat'], 'BigCellDataStruct', '-v7.3');
 
 end
 

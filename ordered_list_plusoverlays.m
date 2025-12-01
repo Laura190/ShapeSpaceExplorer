@@ -4,7 +4,7 @@ function ordered_list_plusoverlays(number,CellShapeData,wish_list,linkagemat,idx
 %load('Z:\Shared240\Archive\Sam_Jefferyes\Microscope_data\BAM_AP_features\CorrectedBigRPEsetAnalysis_37818edit\wish_list.mat')
 %load('Z:\Shared240\Archive\Sam_Jefferyes\Microscope_data\BAM_AP_features\CorrectedBigRPEsetAnalysis_37818edit\linkagemat.mat')
 %load('Z:\Shared240\Archive\Sam_Jefferyes\Microscope_data\TemporalAnalysis\Turns\NecessaryData\refinedSCORE.mat')
-for i=1:1077
+for i=1:length(idx)
     NewCellArray{i}=CellShapeData.point(i).coords_comp;
 end
     SCORE=CellShapeData.point.SCORE;
@@ -38,7 +38,7 @@ figure
 [~,T]=dendrogram(linkagemat,number);
 close
 
-for i=1:68
+for i=1:length(wish_list)
 T2(i)=T(exem_list==wish_list(i));
 end
 
@@ -53,6 +53,22 @@ for i=1:number
     plot(SCORE(points,1),SCORE(points,2),'.','Color',colour(i,:))
     hold on
 end
+xlabel('diffusion coordinate 1')
+ylabel('diffusion coordinate 2')
+axis tight
+axis equal
+grid on
+
+figure
+for i=1:number
+    clust_idx=clust_order(i);
+    exems=wish_list(T2==clust_idx);
+    points=ismember(idx,exems);
+    plot(SCORE(points,3),SCORE(points,4),'.','Color',colour(i,:))
+    hold on
+end
+xlabel('diffusion coordinate 3')
+ylabel('diffusion coordinate 4')
 axis tight
 axis equal
 grid on
